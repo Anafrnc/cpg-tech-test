@@ -13,7 +13,7 @@ class AccueilController extends AbstractController
      */
     public function index() :Response
     {
-        return $this->render('test/accueil.html.twig', [
+        return $this->render('cpg/accueil.html.twig', [
             'titre' => 'CitySearchService',
         ]);
     }
