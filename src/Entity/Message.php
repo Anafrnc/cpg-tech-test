@@ -2,14 +2,15 @@
 
 namespace App\Entity;
 
-use App\Repository\CityRepository;
+use App\Repository\MessageRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity(repositoryClass=CityRepository::class)
+ * @ORM\Entity(repositoryClass=MessageRepository::class)
  */
-class City
+class Message
 {
     /**
      * @ORM\Id
@@ -20,19 +21,30 @@ class City
 
     /**
      * @ORM\Column(type="string", length=50)
+     * @Assert\NotBlank(message="please enter your name)"
      */
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=5, nullable=true)
+     * @ORM\Column(type="string", length=50, nullable=true)
+     * @Assert\NotBlank(message="please enter your email)"
+     * @Assert\Email(
+     *     message = "The email '{{ value }}' is not a valid email."
+     * )
      */
-    private $zip;
+    private $email;
 
     /**
-     * @Gedmo\Slug(fields={"title", "code"})
-     * @ORM\Column(type="string", length=50)
+     * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="please enter your message)"
      */
-    private $slug;
+    private $message;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=City::class)
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $city;
 
     /**
      * @var \DateTime $createdAt
@@ -56,6 +68,7 @@ class City
      * @Gedmo\Timestampable(on="change", field={"title", "body"})
      */
     private $contentChanged;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -73,26 +86,38 @@ class City
         return $this;
     }
 
-    public function getZip(): ?string
+    public function getEmail(): ?string
     {
-        return $this->zip;
+        return $this->email;
     }
 
-    public function setZip(?string $zip): self
+    public function setEmail(?string $email): self
     {
-        $this->zip = $zip;
+        $this->email = $email;
 
         return $this;
     }
 
-    public function getSlug(): ?string
+    public function getMessage(): ?string
     {
-        return $this->slug;
+        return $this->message;
     }
 
-    public function setSlug(string $slug): self
+    public function setMessage(string $message): self
     {
-        $this->slug = $slug;
+        $this->message = $message;
+
+        return $this;
+    }
+
+    public function getCity(): ?City
+    {
+        return $this->city;
+    }
+
+    public function setCity(?City $city): self
+    {
+        $this->city = $city;
 
         return $this;
     }

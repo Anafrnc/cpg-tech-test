@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ city.name }}{% endblock %}
+
+{% block body %}
+    <h1>{{ city.name }}</h1>
+
+    <div class="row">
+        <p>Ajouter un commentaire : </p>
+        {{ form(messageForm) }}
+    </div>
+
+    <div class="row">
+        {% for message in city.messages%}
+            <h5>{{ message.name }}</h5>
+            <h5>{ message.email }}</h5>
+            <p>{{ message.message }}</p>
+        {% endfor %}
+    </div>
+
+{% endblock %}
