@@ -6,13 +6,6 @@ use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class CitySearch
 {
-    private $client;
-
-    public function __construct(HttpClientInterface $client)
-    {
-        $this->client = $client;
-    }
-
     public function fetchCity(httpClientInterface $httpClient)
     {
         $response = $this->client->request(
