@@ -3,5 +3,11 @@
 {% block title %}CitySearch{% endblock %}
 
 {% block body %}
-    <h1>HOME</h1>
+    <h1>Liste des villes : </h1>
+
+    <ul>
+        {% for cityName in cityNames %}
+           <li><a href="{{ path('fetchCity', {name:cityName.nom}) }}">{{ cityName.nom }}</a></li>
+        {% endfor %}
+    </ul>
 {% endblock %}
