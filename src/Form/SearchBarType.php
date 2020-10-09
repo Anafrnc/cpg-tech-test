@@ -12,19 +12,19 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class SearchBarType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('search', TextType::class)
             ->add('submit', SubmitType::class)
-            ->add('city', EntityType::class, [
-                'class' => city::class,
-                'choice_label' => 'name'
-            ]);
+            ;
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
-
+        $resolver->setDefaults([
+            'cityName' => [],
+            'cityCode' => []
+        ]);
     }
 }

@@ -7,7 +7,7 @@
 
     <ul>
         {% for cityName in cityNames %}
-           <li><a href="{{ path('fetchCity', {name:cityName.nom}) }}">{{ cityName.nom }}</a></li>
+           <li><a href="{{ path('showCity', {name:cityName.nom}) }}">{{ cityName.nom }}</a></li>
         {% endfor %}
     </ul>
 {% endblock %}
