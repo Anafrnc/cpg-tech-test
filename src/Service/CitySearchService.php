@@ -8,8 +8,6 @@ use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class CitySearchService
 {
-    private $client;
-
     public function fetchCity(httpClientInterface $httpClient)
     {
         $response = $this->client->request(
